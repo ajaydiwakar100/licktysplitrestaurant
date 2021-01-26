@@ -1,0 +1,37 @@
+i.material-icons {
+    /* margin-right: -14px; */
+    margin-left: -23px;
+}
+
+.tool {
+  opacity: 0;/* If you want dots under the hoverable text */
+  margin-top: -20px;
+
+  }
+  .hoverclass:hover span {
+    opacity: 1;
+    position: absolute;
+  }
+  .one{
+    margin-left: 151px;
+    /* margin-right: 53px; */
+    position: absolute;
+  }
+  /* Tooltip text */
+  /* .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: rgb(160, 60, 60);
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    position: absolute;
+    z-index: 1;
+  }
+  
+ 
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  } */

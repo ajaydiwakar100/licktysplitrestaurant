@@ -1,0 +1,259 @@
+<section class="content">
+    <div class="container-fluid">
+            <div class="pull-right">
+                    <a routerLink="/orderList" class="btn btn-fill btn-primary mat-raised-button">Back</a>
+            </div>
+        <div class="block-header">
+            <h2>Order Details</h2>
+
+        </div>
+        <!-- Basic Example -->
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="header  card-header card-header-warning card-header-icon">
+                        <div class="card-icon"><i class="material-icons">local_grocery_store</i></div>
+                        <h2>
+                            Order Details <small></small>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th><b>#Ref ID</b></th>
+                                    <td class="text-right">{{ orderReferenceId }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Status</b></th>
+                                    <td class="text-right">{{ orderStatus | titlecase }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Amount</b></th>
+                                    <td class="text-right">₹{{ netAmount }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="header  card-header card-header-pink card-header-icon">
+                        <div class="card-icon"><i class="material-icons">location_on</i></div>
+                        <h2>
+                            Delivery Address
+                        </h2>
+                    </div>
+                    <div class="body" style="height:185px;">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td style="width: 50%;" class="text-left"><b>Address Type </b>
+                                            {{ deliveryAddressType }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">{{ deliveryAddress }} <br /><br /></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="header  card-header card-header-grey card-header-icon">
+                        <div class="card-icon"><i class="material-icons">payment</i></div>
+                        <h2>
+                            Payment Details <small></small>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th><b>Payment</b></th>
+                                    <td class="text-right">{{ paymentname }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Amount</b></th>
+                                    <td class="text-right">₹{{ netAmount }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b></b></th>
+                                    <td class="text-right"><br /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Basic Example -->
+
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="card">
+                            <div class="header  card-header card-header-pink card-header-icon">
+                                <div class="card-icon"><i class="material-icons">person</i></div>
+                                <h2>
+                                    User Details <small></small>
+                                </h2>
+
+                            </div>
+                            <div class="body">
+                                <table class="table table-responsive">
+                                    <tbody>
+                                        <tr>
+                                            <th><b>Name</b></th>
+                                            <td class="text-right">{{ userName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>Phone</b></th>
+                                            <td class="text-right">{{ userMobileNumber }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><b>E-Mail</b></th>
+                                            <td class="text-right">{{ userEmail }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="header  card-header card-header-grey card-header-icon">
+                        <div class="card-icon"><i class="material-icons">directions_bike</i></div>
+                        <h2>
+                            Delivery Boy Details <small></small>
+                        </h2>
+
+                    </div>
+                    <div class="body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th><b>Name</b></th>
+                                    <td class="text-right">{{ staffName }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>Phone</b></th>
+                                    <td class="text-right">{{ staffMobileNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <th><b>E-Mail</b></th>
+                                    <td class="text-right">{{ staffeEmail }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row clearfix">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                  <div class="header  card-header card-header-blue card-header-icon">
+                      <div class="card-icon"><i class="material-icons">local_dining</i></div>
+                      <h2>
+                          Order Suggestions
+                      </h2>
+                  </div>
+                  <div class="body">
+
+                      <div class="table-responsive">
+                          <table class="table table-bordered">
+                             <p class="text-center">{{orderSuggestions || "No Suggestions"}}</p>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+        <!-- Items -->
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header  card-header card-header-blue card-header-icon">
+                        <div class="card-icon"><i class="material-icons">local_dining</i></div>
+                        <h2>
+                            Items Ordered
+                        </h2>
+                    </div>
+                    <div class="body">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left">Dishes</th>
+                                        <th class="text-left">Type</th>
+                                        <th class="text-right">Quantity</th>
+                                        <th class="text-right">Unit Price</th>
+                                        <th class="text-right">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let dish of dishes">
+                                        <td class="text-left">
+                                            <p style="color:#0000cd;">{{ dish.dishName }}</p>
+                                            <div *ngFor="let custGroup of dish.customisationItems; let i = index">
+                                                <div  *ngIf = 'i == 0'>
+                                              <i>+</i><br>
+                                              <i style="color:#0000cd;"> extra -</i>
+                                                <br>
+                                                &nbsp;
+                                                <span *ngFor="let custItems of custGroup.customizableDishItems">
+                                                    <span *ngIf="dish.isVeg == 1"><img src="assets/images/veg-icon.png"
+                                                            height="10" width="10"></span><span
+                                                        *ngIf="dish.isVeg == 0"><img src="assets/images/nv.png"
+                                                            height="10" width="10"></span><small>
+                                                        {{ ' ' + custItems.elementName + ' ' + custItems.displayPrice + ' ' }}
+                                                    </small>
+                                                    <br>
+                                                    &nbsp;
+                                                </span>
+                                            </div>
+                                            </div>
+
+
+                                        </td>
+                                        <td *ngIf="dish.isVeg == 1"><img src="assets/images/veg-icon.png" height="20"
+                                                width="20"></td>
+                                        <td *ngIf="dish.isVeg == 0"><img src="assets/images/nv.png" height="20"
+                                                width="20"></td>
+                                        <td class="text-right">{{ dish.quantity }}</td>
+                                        <td class="text-right">{{ dish.price }}</td>
+                                        <td class="text-right">{{ dish.displayDishTotal }}</td>
+                                    </tr>
+                                    <tr *ngFor="let bill of billTotals">
+                                        <th colspan="4" class="text-right">{{ bill.displayKey }}</th>
+                                        <td class="text-right">{{ bill.displayValue }}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

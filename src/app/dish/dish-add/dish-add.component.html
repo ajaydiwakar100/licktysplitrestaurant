@@ -1,0 +1,416 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <h2></h2>
+    </div>
+    <!-- Input -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2> {{ formName }} </h2>
+          </div>
+          <div class="body">
+            <div class="pull-right">
+              <button type="submit" *ngIf="submitDisable === false" form="dishForm"
+                class="btn btn-fill btn-primary mat-raised-button">Save</button>
+              <a href="#tab-address" *ngIf="showCustomisationGroup === true"
+                class="btn btn-fill btn-primary mat-raised-button" (click)="getCategory()" data-toggle="tab">Next</a>
+              <a href="#tab-address" *ngIf="submitCust === true" class="btn btn-fill btn-primary mat-raised-button"
+                (click)="getCustomisation()" data-toggle="tab">Next</a>
+                &nbsp;
+              <a routerLink="/dishList" class="btn btn-fill btn-warning mat-raised-button">Cancel</a>
+            </div>
+            <ul class="nav nav-tabs">
+              <li class="active" id="1"><a href="#tab-general" (click)="getCustomisationBasic()"
+                  data-toggle="tab">Basic</a></li>
+              <li *ngIf="showCustomisation === true" id="2"><a href="#tab-address" (click)="getCategory()"
+                  data-toggle="tab">Customisation Group</a></li>
+              <li *ngIf="showCustomisation === true" id="3"><a href="#tab-address" (click)="getCustomisation()"
+                  data-toggle="tab">Customisation</a></li>
+            </ul>
+            <div class="row-clearfix"></div>
+            <div class="col-xs-12"></div>
+            <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" id="dishForm" enctype="multipart/form-data">
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab-general">
+                  <h2 class="card-inside-title"></h2>
+                  <div class="col-sm-12"></div>
+                  <div class="row clearfix">
+                    <div class="form-group">
+                      <div class="col-sm-2"><label>Category</label></div>
+                      <div class="col-sm-10">
+                        <select class="form-control form-line show-tick" formControlName="categoryId">
+                          <option value=''>-- Select Parent Category --</option>
+                          <option *ngFor="let category of dishCategoryList" value="{{ category.categoryId }}" [disabled]="category.status === 0">
+                            {{ category.categoryName }}</option>
+                        </select>
+                        <div *ngIf="submitted && f.categoryId.errors" class="error">
+                          <div *ngIf="f.categoryId.errors.required">Please Select Category</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"><label>Dish Name</label></div>
+                    <div class="col-sm-10">
+                      <div class="form-group">
+                        <div class="form-line">
+                          <input type="text" class="form-control" placeholder="Dish Name" formControlName="name" />
+                        </div>
+                        <div *ngIf="submitted && f.name.errors" class="error">
+                          <div *ngIf="f.name.errors.required">Dish Name is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"><label>Price</label></div>
+                    <div class="col-sm-10">
+                      <div class="form-group">
+                        <div class="form-line">
+                          <input type="number" class="form-control" placeholder="Price" formControlName="price" 
+                          min="0" (keypress)="numberOnly2($event)" decimals="2"/> 
+                        </div>
+                        <div *ngIf="submitted && f.price.errors" class="error">
+                          <div *ngIf="f.price.errors.required">Price is required</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-2"><label>Is Slashed Price</label></div>
+                    <div class="col-sm-10">
+                      <div class="demo-radio-button">
+                        <input name="isSlashed" type="radio" (change)="isSlashed($event.target.value)" id="radio_10001"
+                          value=1 [checked]="hideSlash === false"/>
+                        <label for="radio_10001">Yes</label>
+                        <input name="isSlashed" type="radio" (change)="isSlashed($event.target.value)" id="radio_29002"
+                          value=0 [checked]="hideSlash === true"/>
+                        <label for="radio_29002">No</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-2" *ngIf="hideSlash === false"><label>Slashed Price</label></div>
+                    <div class="col-sm-10" *ngIf="hideSlash === false">
+                      <div class="form-group">
+                        <div class="form-line">
+                          <input type="number" class="form-control" placeholder="Slashed Price"
+                            formControlName="slashedPrice"  min="0" (keypress)="numberOnly2($event)"  />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"><label>Maximum Quantity</label></div>
+                    <div class="col-sm-10">
+                      <div class="form-group">
+                        <div class="form-line">
+                          <input type="number" class="form-control" placeholder="Quantity" formControlName="quantity"
+                          (keypress)="numberOnly($event)" min="0"/>
+
+                        </div>
+                        <div *ngIf="submitted && f.quantity.errors" class="error">
+                          <div *ngIf="f.quantity.errors.required">Quantity is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"><label>From Time</label></div>
+                    <div class="col-sm-4">
+                      <div class="input-group date" id="bs_datepicker_component_container">
+                        <div class="form-line">
+                          <ngx-material-timepicker (timeSet)="timeChanged($event)" #picker></ngx-material-timepicker>
+                          <input [ngxTimepicker]="picker" [format]="24" 
+                            formControlName="showFromTime"
+                              name="picker"
+                            class="form-control" placeholder="Please choose From Time..."
+                            style="width: 80%;">
+                        </div>
+                        <div  *ngIf="submitted && f.showFromTime.errors" class="error">
+                          <div *ngIf="f.showFromTime.errors.required">From time is required</div>
+                        </div>
+                        <span class="input-group-addon" >
+                          <i class="material-icons">date_range</i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <label>To Time</label>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="input-group date" id="bs_datepicker_component_container">
+                        <div class="form-line">
+                          <ngx-material-timepicker #pickerTo></ngx-material-timepicker>
+                          <input [ngxTimepicker]="pickerTo" 
+                          [format]="24" formControlName="showToTime" type="text"
+                          [min]="minToTime" 
+                            class="form-control" placeholder="Please choose To Time..."
+                            style="width: 80%;">
+                        </div>
+                        <div *ngIf="submitted && f.showToTime.errors" class="error">
+                          <div *ngIf="f.showToTime.errors.required">To time is required</div>
+                        </div>
+                        <span class="input-group-addon">
+                          <i class="material-icons">date_range</i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="demo-radio-button">
+                        <label>Is Veg</label>
+                        <input name="isVeg" type="radio" id="radio_678" value=1 formControlName="isVeg" [checked] = "vegChecked === true" />
+                        <label for="radio_678">Yes</label>
+                        <input name="isVeg" type="radio" id="radio_963" value=0 formControlName="isVeg" [checked] = "vegChecked === false"/>
+                        <label for="radio_963">No</label>
+                        <div *ngIf="submitted && f.isVeg.errors" class="error" style="padding-left: 155px;">
+                          <div *ngIf="f.isVeg.errors.required">Is Veg required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="demo-radio-button">
+                        <label>Status</label>
+                        <input name="status" type="radio" id="radio_221" value=1 formControlName="status" [checked] = "statusChecked === true"/>
+                        <label for="radio_221">Active</label>
+                        <input name="status" type="radio" id="radio_220" value=0 formControlName="status" [checked] = "statusChecked === false"/>
+                        <label for="radio_220">Inactive</label>
+                        <div *ngIf="submitted && f.status.errors" class="error" style="padding-left: 155px;">
+                          <div *ngIf="f.status.errors.required">Status required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="demo-radio-button">
+                        <label>Is Customisation</label>
+                        <input name="isCustomisation" type="radio" (change)="isCustomisation($event.target.value)"
+                          id="radio_1" value=1 formControlName="isCustomisation" [checked] = "custChecked === true"/>
+                        <label for="radio_1">Yes</label>
+                        <input name="isCustomisation" type="radio" (change)="isCustomisation($event.target.value)"
+                          id="radio_2" value=0 formControlName="isCustomisation" [checked] = "custChecked === false"/>
+                        <label for="radio_2">No</label>
+                        <div *ngIf="submitted && f.isCustomisation.errors" class="error" style="padding-left: 155px;">
+                          <div *ngIf="f.isCustomisation.errors.required">Is Customisation required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="demo-radio-button">
+                        <div style="display: flex;">
+                        <label>Recommended</label>
+                        <!-- <div class="tooltip">Hover over me
+                          <span class="tooltiptext">Tooltip text</span>
+                        </div> -->
+                        <div class="hoverclass"> 
+                        <i class="material-icons">info</i>
+                        <span class="tool">To list item on top with Image</span>
+                      </div>
+                      <div class="one">
+                        <input name="isRecommended" type="radio" (change)="uploadImage($event.target.value)"
+                          id="radio_1000" value=1 formControlName="isRecommended" [checked] = "recommendedChecked === true"/>
+                        <label for="radio_1000">Yes</label>
+                        <input name="isRecommended" type="radio" (change)="uploadImage($event.target.value)"
+                          id="radio_2900" value=0 formControlName="isRecommended" [checked] = "recommendedChecked === false"/>
+                        <label for="radio_2900">No</label>
+                        <div *ngIf="submitted && f.isRecommended.errors" class="error" style="padding-left: 155px;">
+                          <div *ngIf="f.isRecommended.errors.required">Is Recommended required</div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-sm-12">
+                      <label>Item Image</label>
+                      <div class="form-group">
+                        <div class="form-line">
+                          <input type="file" (change)="handleFileInput($event.target.files)" class="form-control"
+                            formControlName="image" id="bannerImage" #fileInput />
+                        </div>
+                        <div *ngIf="submitted && f.image.errors" class="error">
+                          <div *ngIf="f.image.errors.required">Please Select Image</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="center">
+                        <img [src]="url || 'assets/images/image_placeholder.jpg'" height="250" width="400"> <br />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab-group">
+                  <div formArrayName="customisationGroupSelect">
+                    <div *ngFor="let X of dishForm['controls'].customisationGroupSelect['controls']; let i = index">
+                      <div formGroupName="{{ i }}" class="customisationGroupSelect">
+                        <div class="row clearfix">
+                          <div class="col-xs-3">
+                            <h2 class="card-inside-title">Customisation Name</h2>
+                            <div class="form-group">
+                              <div class="form-line" id="bs_datepicker_container">
+                                <select class="form-control form-line show-tick" formControlName="groupId">
+                                  <option value=''>-- Select Parent Category --</option>
+                                  <option *ngFor="let category of dishGroupList" value="{{ category.id }}">
+                                    {{ category.name }}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div> {{ X.customisationCategoryId }}
+                          <div class="col-xs-3">
+                            <a *ngIf="dishForm['controls'].customisationGroupSelect['controls'].length > 1"
+                              (click)="deleteRow(i)" class="btn btn-danger">Remove Customisation Group</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <a (click)="addGroup()" class="btn btn-success">Add Customisation Group</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab-address">
+                  <div formArrayName="customisationCategory">
+                    <div *ngFor="let X of dishForm['controls'].customisationCategory['controls']; let i = index">
+                      <div formGroupName="{{ i }}" class="customisationCategory">
+                        <div class="row clearfix">
+                          <div class="col-xs-3">
+                            <div class="form-group">
+                              <div class="form-line" id="bs_datepicker_container">
+                                <select class="form-control form-line show-tick"
+                                  formControlName="customisationCategoryId">
+                                  <option value=''>-- Select Parent Category --</option>
+                                  <option *ngFor="let category of dishGroupList" value="{{ category.id }}">
+                                    {{ category.name }}</option>
+                                </select>
+                              </div>
+
+                            </div>
+                          </div>
+
+                          <!-- Section for min max -->
+
+                            <div class="col-xs-2">
+                              <div class="form-group">
+                                <div class="form-line" id="bs_datepicker_container">
+                              <input type="number" class="form-control" placeholder="Max" formControlName="customisationGroupMax" 
+                              min="0" (keypress)="numberOnly($event)"/>
+                                </div>
+                              </div>
+                             
+                            </div>
+                            <div class="col-xs-2">
+                              <div class="form-group">
+                                <div class="form-line" id="bs_datepicker_container">
+                              <input type="number" class="form-control" placeholder="Min" formControlName="customisationGroupMin" 
+                              min="0" (keypress)="numberOnly($event)"/>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="error-msg" *ngIf="customCategory.hasError('maxValueExceed')">
+                              the capacity is bigger than count ...
+                            </div>
+                          <!-- section for min max ends -->
+
+                          <div class="col-xs-3" *ngIf="hideCategory === true">
+                            <a *ngIf="dishForm['controls'].customisationCategory['controls'].length > 1"
+                              (click)="deleteRow(i)" class="btn btn-danger">Remove Customisation Group</a>
+                          </div>
+                        </div>
+                        <div class="row clearfix" *ngIf="hideCategory === false">
+                          <div class="col-xs-2">
+                            <h2 class="card-inside-title">Customisation Name</h2>
+                          </div>
+                          <div class="col-xs-2">
+                            <h2 class="card-inside-title">Price</h2>
+                          </div>
+                          <div class="col-xs-2">
+                            <h2 class="card-inside-title">Is Veg</h2>
+                          </div>
+                          <div class="col-xs-3">
+                            <h2 class="card-inside-title">Selected</h2>
+                          </div>
+                          <div class="col-xs-3"></div>
+                        </div>
+                        <!-- customisation items -->
+                        <div formArrayName="customisationItem" *ngIf="hideCategory === false">
+                          <div *ngFor="let Y of X['controls'].customisationItem['controls']; let iy = index">
+                            <div formGroupName="{{ iy }}" class="Ys">
+                              <div class="row clearfix">
+                                <!-- <input type="text" value ="{{ category.id }}"class="form-control" placeholder="PriccategoriesPathIde"
+                                formControlName="categoriesPathId"  min="0" onkeypress="numberOnly2($event) "/>-->
+                                <div class="col-xs-2">
+                                  <div class="form-group">
+                                    <div class="form-line" id="bs_datepicker_container">
+                                      <input type="text" class="form-control" placeholder="Name"
+                                        formControlName="name" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xs-2">
+                                  <div class="form-group">
+                                    <div class="form-line" id="bs_datepicker_container">
+                                      <input type="number" class="form-control" placeholder="Price"
+                                        formControlName="price"  min="0" onkeypress="numberOnly2($event) "/>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xs-2">
+                                  <div class="input-daterange input-group" id="bs_datepicker_range_container">
+                                    <div class="demo-radio-button">
+                                      <input type="checkbox" id="{{ i + '' + iy }}" value=1 formControlName="isVeg" />
+                                      <label for="{{ i + '' + iy }}"></label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xs-2">
+                                  <div class="input-daterange input-group" id="bs_datepicker_range_container">
+                                    <div class="demo-radio-button">
+                                      <input type="checkbox" (change)="ChangeSelected(X.value.customisationCategoryId)"
+                                        name="selected" id="{{ i + 'r' + iy }}" formControlName="selected" />
+                                      <label for="{{ i + 'r' + iy }}"></label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xs-2">
+                                  <a *ngIf="dishForm['controls'].customisationCategory['controls'][i]['controls'].customisationItem['controls'].length > 1"
+                                    (click)="deleteItem(i, iy)" class="btn btn-danger">Remove Customisation</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12" style="float: unset;">
+                            <a (click)="addItem(i)" class="btn btn-success">Add Item</a>
+                          </div>
+                        </div>
+                        <!-- customisation Item -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12" style="float: unset;" *ngIf="hideCategory === true">
+                    <a (click)="addRow()" class="btn btn-primary">Add Customisation Group</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #END# Input -->
+  </div>
+</section>
+<!-- <style>
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  </style> -->

@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+
+.theme-orange {
+    background-color: #F8F8F8;
+}
+
+.login-page {
+    max-width: 521px!important;
+    background-color: #3f51b5!important;
+}
+
+.add-city {
+    background-color: #00BCD4;
+    padding-left: 0;
+    max-width: 763px;
+    margin: 5% auto;
+    overflow-x: hidden;
+}
+
+.add-city .login-box .logo a {
+    font-size: 36px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+
+.add-city .login-box a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #00BCD4;
+}
+
+.add-city .login-box .logo small {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    margin-top: -5px;
+}
+.swal2-container {
+  zoom: 1.4;
+}
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.theme-orange .navbar {
+    background-color: transparent !important;
+}
+
+.error {
+    color: #b40000;
+}

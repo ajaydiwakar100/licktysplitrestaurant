@@ -1,0 +1,88 @@
+<section>
+  <!-- Left Sidebar -->
+  <aside id="leftsidebar" class="sidebar">
+      <!-- User Info -->
+      <div class="user-info">
+          <div class="image">
+              <img src="assets/images/swift.png" width="48" height="48" alt="User" />
+          </div>
+          <div class="info-container">
+              <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ userName }}</div>
+              <div class="email">{{ email }}</div>
+              <div class="btn-group user-helper-dropdown">
+                  <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a routerLink="/profile"><i class="material-icons">person_pin</i>Profile</a></li>
+                    <li><a (click)="logout()"><i class="material-icons">input</i>Sign Out</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <!-- #User Info -->
+      <!-- Menu -->
+      <div class="menu">
+          <ul class="list">
+              <!-- <li class="header">MAIN NAVIGATION</li> -->
+              <li routerLinkActive="active">
+                  <a routerLink="/dashboard" >
+                      <i class="material-icons">dashboard</i>
+                      <span>Dashboard</span>
+                  </a>
+              </li>
+              <!-- <li routerLinkActive="active">
+                <a routerLink="/changepass" >
+                    <i class="material-icons">lock_open</i>
+                    <span>Change Password</span>
+                </a>
+            </li>  -->
+              <li routerLinkActive="active">
+                <a routerLink="/categoryList" >
+                    <i class="material-icons">widgets</i>
+                    <span>Category</span>
+                </a>
+              </li>
+              <!-- <li routerLinkActive="active">
+                <a routerLink="/transaction">
+                    <i class="material-icons">account_balance_wallet</i>
+                    <span>Provider Payout</span>
+                </a>
+            </li> -->
+              <li routerLinkActive="active">
+                <a routerLink="/customisationList" >
+                    <i class="material-icons">receipt</i>
+                    <span>Customisation Groups</span>
+                </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/dishList" >
+                    <i class="material-icons">room_service</i>
+                    <span>Dishes</span>
+                </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/orderList" >
+                    <i class="material-icons">shopping_cart</i>
+                    <span>Orders</span>
+                </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/couponList" >
+                    <i class="material-icons">local_offer</i>
+                    <span>Coupon</span>
+                </a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/reports" >
+                    <i class="material-icons">archive</i>
+                    <span>Reports</span>
+                </a>
+              </li>           
+            </ul>
+      </div>
+      <!-- #Menu -->
+      <!-- Footer -->
+
+      <!-- #Footer -->
+  </aside>
+  <!-- #END# Left Sidebar -->
+</section>

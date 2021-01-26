@@ -1,0 +1,72 @@
+<section class="content">
+  <div class="container-fluid">
+
+    <div class="block-header">
+      <h2>Dishes List</h2>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <div> 
+              <div class="pull-right" style="margin-left:20px;">
+                <a routerLink="/dishAdd" class="btn btn-fill btn-primary mat-raised-button waves-effect">New Item</a>
+              </div>
+              <!-- <div class="pull-right">
+                <a (click)="exportAsXLSX()" class="btn btn-fill btn-success mat-raised-button">EXPORT</a>
+              </div> -->
+              <!-- <div class="pull-right">
+                <a (click)="exportAsXLSX()" class="btn btn-fill btn-success mat-raised-button">EXPORT</a>
+              </div> -->
+          </div>
+            <div style="display: flex;">
+            <label style="    font-variant-caps: titling-caps;
+            font-family: sans-serif;">Bulk Upload</label>&nbsp;
+        <input type="file" placeholder="Upload"
+           id="file"
+           (change)="handleFileInput($event.target.files)">
+          </div>
+           
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+              <table id="datatables" class="table table-striped table-no-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dish of dishList; let i = index" current-page="currentPage">
+                    <th scope="row">{{ 10 *( page-1 ) + i + 1 }}</th>
+                    <td>{{ dish.name }}</td>
+                    <td>{{ dish.price }}</td>
+                    <td *ngIf="dish.isVeg === 1"><img src="assets/images/veg-icon.png" height="25" width="25"></td>
+                    <td *ngIf="dish.isVeg === 0"><img src="assets/images/nv.png" height="25" width="25"></td>
+                    <td *ngIf="dish.status === 1">Active</td>
+                    <td *ngIf="dish.status === 0">Inactive</td>
+                    <td>
+                      <a routerLink="/dishEdit/{{ dish.id }}"
+                        class="btn btn-fill btn-warning mat-raised-button waves-effect">Edit</a>
+                      &nbsp;
+                      <a (click)="deleteDish(dish.id)"
+                        class="btn btn-fill btn-danger mat-raised-button waves-effect">Delete</a>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ngb-pagination [collectionSize]="pages" (pageChange)="getdish($event)" [(page)]="page" [maxSize]="5"
+              [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

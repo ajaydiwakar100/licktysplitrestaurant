@@ -1,0 +1,86 @@
+.bg-pink {
+    background-color: #F36A7B !important;
+    color: #fff;
+}
+
+.bg-purple {
+    background-color: #5893D4 !important;
+    color: #fff;
+}
+
+.bg-orange {
+    background-color: #1CB3C8 !important;
+    color: #fff;
+}
+
+.bg-black {
+    background-color: #ffba5a !important;
+    color: #fff;
+}
+
+.info-box .icon i {
+    color: #fff;
+    font-size: 28px;
+    line-height: 80px;
+}
+  
+  .zoom:hover {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5); 
+  }
+  .icon.icon_clrs1 {
+    background: #F36A7B;
+}
+.icon.icon_clrs2 {
+    background: #5893D4;
+}
+.icon.icon_clrs3 {
+    background: #1CB3C8;
+}
+.icon.icon_clrs4 {
+    background: #FFBA5A;
+}
+  .info-box {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    height: 80px;
+    display: flex;
+    cursor: default;
+    
+    background-color: #fff!important;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.info-box[_ngcontent-c6] {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    height: 80px;
+    display: flex;
+    cursor: default;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    border-radius: 6px;
+}
+
+.info-box .content {
+    display: inline-block;
+    padding: 14px 23px;
+}
+
+.info-box .content .text {
+    font-size: 12px;
+    margin-top: 11px;
+    
+    color: #3f4d67!important;
+}
+
+.info-box .content .number {
+    font-weight: normal;
+    font-size: 18px;
+    margin-top: 0px;
+        color: #3f4d67!important;
+}

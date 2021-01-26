@@ -1,0 +1,73 @@
+<section class="content">
+
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2></h2>
+        </div>
+
+        <!-- Input -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+
+                    <div class="header">
+                      <h2> {{ formName }} </h2>
+
+                    </div>
+
+                    <div class="body">
+
+                        <div class="pull-right">
+                            <button type="submit" form="customisationForm" class="btn btn-fill btn-primary mat-raised-button">Save</button>
+                            &nbsp;
+                            <a routerLink="/customisationList" class="btn btn-fill btn-warning mat-raised-button">Cancel</a>
+                        </div>
+
+
+                        <form [formGroup]="customisationForm" (ngSubmit)="onSubmit()" id="customisationForm" enctype="multipart/form-data">
+
+                        <h2 class="card-inside-title"></h2>
+                        <div class="col-sm-12"></div>
+                        <div class="row clearfix">
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Group Name" formControlName="name"/>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="demo-radio-button">
+                                  <label>Type</label>
+                                    <input name="type" type="radio" id="single" value='single' formControlName="type" [checked]="typeEnabled === true"/>
+                                    <label for="single">Single</label>
+                                    <input name="type" type="radio" id="multiple" value='multiple' formControlName="type" [checked]="typeDisabled === true"/>
+                                    <label for="multiple">Multiple</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="demo-radio-button">
+                                  <label>Status</label>
+                                    <input name="status" type="radio" id="radio_1" value=1 formControlName="status" [checked]="statusEnabled === true"/>
+                                    <label for="radio_1">Enable</label>
+                                    <input name="status" type="radio" id="radio_2" value=0 formControlName="status" [checked]="statusDisabled === true"/>
+                                    <label for="radio_2">Disable</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tab closed -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Input -->
+
+    </div>
+    </section>
